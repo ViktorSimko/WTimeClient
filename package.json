@@ -1,10 +1,11 @@
 {
-  "name": "react-boilerplate",
+  "name": "WTime",
   "version": "1.0.0",
-  "description": "first react app",
-  "main": "index.js",
+  "description": "WTime client",
+  "main": "main.js",
   "scripts": {
     "start": "node server.js",
+    "watch": "./node_modules/.bin/webpack-dev-server",
     "start-dev": "node server.js& webpack -w",
     "test": "karma start"
   },
@@ -40,6 +41,7 @@
     "sass-loader": "^6.0.3",
     "script-loader": "^0.7.0",
     "style-loader": "^0.16.1",
-    "webpack": "^2.4.1"
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.5"
   }
 }

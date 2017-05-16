@@ -1,1 +1,1 @@
-Boilerplate React App
+WTime client application

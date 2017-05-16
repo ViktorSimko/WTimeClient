@@ -1,20 +1,28 @@
 const path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
   entry: [
+    'webpack/hot/dev-server',
     'script-loader!jquery/dist/jquery.min.js',
     'script-loader!foundation-sites/dist/js/foundation.min.js',
     './app/app.jsx'
   ],
   output: {
-    path: __dirname,
-    filename: './public/bundle.js'
+    path: path.resolve(__dirname, 'public/built'),
+    filename: 'bundle.js',
+    publicPath: 'http://localhost:8080/built'
+  },
+  devServer: {
+    contentBase: './public',
+    publicPath: 'http://localhost:8080/built'
   },
   resolve: {
-    modules: [".", "node_modules"],
+    modules: ["app/api", "app/components", ".", "node_modules"],
     alias: {
       applicationStyles: 'app/styles/app.scss'
     },
+    extensions: [".js", ".jsx"]
   },
   module: {
     rules: [
@@ -44,5 +52,8 @@ module.exports = {
       }
     ]
   },
-  devtool: 'source-map'
+  devtool: 'source-map',
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
 };
