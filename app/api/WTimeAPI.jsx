@@ -5,7 +5,7 @@ var WTimeAPI = {
   Private: {
     clientName: 'wtime-client',
     clientSecret: 'secret',
-    apiUrl: 'http://localhost:8000/'
+    apiUrl: 'http://localhost:8080/'
   },
 
   Public: {
@@ -13,7 +13,10 @@ var WTimeAPI = {
       console.log(userName);
       console.log(password);
 
-      var loginUrl = `${WTimeAPI.Private.apiUrl}oauth/token?grant_type=password&username=${userName}&password=${password}`
+      var encodedUserName = encodeURIComponent(userName);
+      var encodedPassword = encodeURIComponent(password);
+
+      var loginUrl = `${WTimeAPI.Private.apiUrl}oauth/token?grant_type=password&username=${encodedUserName}&password=${encodedPassword}`
 
       return Axios({
         method: 'POST',

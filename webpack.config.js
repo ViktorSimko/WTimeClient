@@ -11,14 +11,14 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'public/built'),
     filename: 'bundle.js',
-    publicPath: 'http://localhost:8080/built'
+    publicPath: 'http://localhost:3000/built'
   },
   devServer: {
     contentBase: './public',
-    publicPath: 'http://localhost:8080/built'
+    publicPath: 'http://localhost:3000/built'
   },
   resolve: {
-    modules: ["app/api", "app/components", ".", "node_modules"],
+    modules: ["app", "app/api", "app/components", ".", "node_modules"],
     alias: {
       applicationStyles: 'app/styles/app.scss'
     },
