@@ -1,8 +1,8 @@
-import * as types from 'actions/action-types' 
+import * as types from 'actions' 
 
 const initialState = {
-
-  userName: null,
+  isLoggedIn: false,
+  username: null,
   accessToken: null
 
 }
@@ -10,10 +10,10 @@ const initialState = {
 const userReducer = function (state = initialState, action) {
   switch (action.type) {
     case types.LOGIN_SUCCESS:
-      return Object.assign({}, state, {userName: action.userName, accessToken: action.accessToken})
+      return Object.assign({}, state, {isLoggedIn: true, username: action.username, accessToken: action.accessToken})
       
     case types.LOGOUT_SUCCESS:
-      return {userName: null, accessToken: null} 
+      return {isLoggedIn: false, username: null, accessToken: null} 
 
   }
 

@@ -3,3 +3,7 @@
 @import "base/foundation-settings";
 @import "foundation";
 @include foundation-everything;
+
+@import "components/navigation-bar.scss";
+@import "components/main.scss";
+@import "components/login"

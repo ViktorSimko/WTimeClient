@@ -1,6 +1,4 @@
 import React from 'react'
-import WTimeAPI from 'WTimeAPI'
-import {hashHistory} from 'react-router'
 
 class Login extends React.Component {
   constructor(props) {
@@ -14,22 +12,23 @@ class Login extends React.Component {
 
     let userName = this.refs.userNameField.value;
     let password = this.refs.passwordField.value;
-    WTimeAPI.loginUser(userName, password).then(() => {
-      hashHistory.push('/projects');
-    });
+    this.props.onLogin(userName, password);
   }
 
   render() {
     return (
       <div id='wtime-login'>
+        <h3 className='text-center'>Login</h3>
         <form onSubmit={this.handleLogin}>
           <input type='text' ref='userNameField'/>
           <input type='password' ref='passwordField'/>
-          <button type='submit'>Login</button>
+          <button type='submit' className='button expanded'>Login</button>
         </form>
       </div>
     )
   }
 }
+
+
 
 export default Login

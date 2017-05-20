@@ -9,14 +9,14 @@ var WTimeAPI = {
   },
 
   Public: {
-    loginUser: function (userName, password) {
-      console.log(userName);
+    loginUser: function (username, password) {
+      console.log(username);
       console.log(password);
 
-      var encodedUserName = encodeURIComponent(userName);
+      var encodedUsername = encodeURIComponent(username);
       var encodedPassword = encodeURIComponent(password);
 
-      var loginUrl = `${WTimeAPI.Private.apiUrl}oauth/token?grant_type=password&username=${encodedUserName}&password=${encodedPassword}`
+      var loginUrl = `${WTimeAPI.Private.apiUrl}oauth/token?grant_type=password&username=${encodedUsername}&password=${encodedPassword}`
 
       return Axios({
         method: 'POST',
@@ -26,8 +26,21 @@ var WTimeAPI = {
           password: WTimeAPI.Private.clientSecret
         }
       }).then((res) => {
-        console.log(res);
+        return {username: username, accessToken: res.data.access_token}
       });
+    },
+
+    getProjects: function (accessToken) {
+
+      var projectsUrl = `${WTimeAPI.Private.apiUrl}projects?access_token=${accessToken}`;
+
+      return Axios({
+        method: 'GET',
+        url: projectsUrl
+      }).then((res) => {
+        return res.data
+      });
+
     }
   }
 
