@@ -4,6 +4,7 @@ import {hashHistory} from 'react-router'
 
 import ProjectContainer from 'ProjectContainer'
 import ProjectsContainer from 'ProjectsContainer'
+import TaskContainer from 'TaskContainer'
 
 class MainContainer extends React.Component {
 
@@ -18,6 +19,7 @@ class MainContainer extends React.Component {
       <div className='row'>
         <ProjectsContainer/>
         <ProjectContainer/>
+        <TaskContainer/>
       </div>
     )
   }

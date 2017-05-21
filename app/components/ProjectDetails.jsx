@@ -5,18 +5,10 @@ class ProjectDetails extends React.Component {
     let {title, description, hourlyWage} = this.props;
 
     return (
-      <div className='row'>
-        <div className='small-6 small-centered columns'>
-          <div className='row'>
-            <h4 className='text-center'>{title}</h4>
-          </div>
-          <div className='row'>
-            <p className='text'>{description}</p>
-          </div>
-          <div className='row'>
-            <p className='text'>Hourly wage: {hourlyWage}</p>
-          </div>
-        </div>
+      <div className='callout primary'>
+        <h4 className='text-center'>{title}</h4>
+        <p className='text'>{description}</p>
+        <p className='text'>Hourly wage: {hourlyWage}</p>
       </div>
     )
   }
