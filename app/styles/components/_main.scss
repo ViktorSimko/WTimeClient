@@ -1,0 +1,8 @@
+#wtime-container {
+  overflow-y: auto;
+  height: 100vh;
+}
+
+#wtime-container > div {
+  height: inherit;
+}

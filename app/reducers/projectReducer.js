@@ -2,16 +2,28 @@ import * as types from 'actions'
 
 const initialState = {
   projects: [],
-  project: null
+  project: null,
+  selectedProject: null,
+  projectViewShouldUpdate: false
 }
 
 const projectReducer = function (state = initialState, action) {
 
   switch (action.type) {
     case types.GET_PROJECTS_SUCCESS:
-      return {projects: action.projects}
+      return Object.assign({}, state, {
+        projects: action.projects
+      })
     case types.GET_PROJECT_SUCCESS:
-      return {project: action.project}
+      return Object.assign({}, state, {
+        project: action.project,
+        projectViewShouldUpdate: false
+      })
+    case types.SELECTED_PROJECT:
+      return Object.assign({}, state, {
+        selectedProject: action.id,
+        projectViewShouldUpdate: true
+      })
   }
 
   return state

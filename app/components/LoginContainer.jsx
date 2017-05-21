@@ -16,13 +16,17 @@ class LoginContainer extends React.Component {
   handleLogin(username, password) {
     WTimeAPI.loginUser(username, password).then((userData) => {
       this.props.loginSuccess(userData);
-      hashHistory.replace('/projects');
+      hashHistory.replace('/');
     })
   }
 
   render() {
     return (
-      <Login onLogin={this.handleLogin}/>
+      <div className='row align-center align-middle'>
+        <div className='small-6 column'>
+          <Login onLogin={this.handleLogin}/>
+        </div>
+      </div>
     )
   }
 

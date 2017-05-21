@@ -11,10 +11,7 @@ export default (
   <Router history={hashHistory}>
     <Route path='/' component={Layout}>
       <Route path='/login' component={LoginContainer}/>
-      <Route component={MainContainer}>
-        <Route path='/projects' component={ProjectsContainer}/>
-        <Route path='/project/:projectId' component={ProjectContainer}/>
-      </Route>
+      <IndexRoute component={MainContainer}/>
     </Route>
   </Router>
 );

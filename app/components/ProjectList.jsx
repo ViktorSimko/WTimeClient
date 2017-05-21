@@ -3,18 +3,19 @@ import React from 'react'
 import ProjectListItem from 'ProjectListItem'
 
 class ProjectList extends React.Component {
+
   render() {
     let renderProjects = () => {
-      return this.props.projects.map((project) => <ProjectListItem key={project.id} {...project}/>)
+      return this.props.projects.map((project) => <ProjectListItem key={project.id} {...project} onProjectSelected={this.props.onProjectSelected}/>)
     }
 
     return (
-      <div className='row'>
-        <div className='small-6 small-centered columns'>
-          <div className='row'>
-            <h4 className='text small-11 small-left columns'>Projects</h4>
-            <button className='button hollow small-1 small-right columns'>+</button>
-          </div>
+      <div>
+        <div className='row'>
+          <h3 className='text subheader columns'>Projects</h3>
+          <button id='project-list-add-button' className='button'>&#x2795;</button>
+        </div>
+        <div>
           {renderProjects()}
         </div>
       </div>

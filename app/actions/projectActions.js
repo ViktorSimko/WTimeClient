@@ -13,3 +13,10 @@ export function getProjectSuccess(project) {
     project,
   }
 }
+
+export function selectedProject(id) {
+  return {
+    type: types.SELECTED_PROJECT,
+    id,
+  }
+}

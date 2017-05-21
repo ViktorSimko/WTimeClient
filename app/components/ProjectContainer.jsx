@@ -8,13 +8,15 @@ import {getProjectSuccess} from 'actions/projectActions'
 
 class ProjectContainer extends React.Component {
 
-  componentDidMount() {
+  componentDidUpdate(prevProps, prevState) {
+    if (!this.props.shouldUpdate) {
+      return
+    }
 
-    WTimeAPI.getProject(this.props.accessToken, this.props.params.projectId).then((project) => {
+    WTimeAPI.getProject(this.props.accessToken, this.props.projectId).then((project) => {
       console.log(project);
       this.props.getProjectSuccess(project)
     })
-
   }
 
   render() {
@@ -26,7 +28,11 @@ class ProjectContainer extends React.Component {
       }
     }
 
-    return renderProject()
+    return (
+      <div className='columns'>
+        {renderProject()}
+      </div>
+    )
   }
 
 }
@@ -34,7 +40,9 @@ class ProjectContainer extends React.Component {
 const mapStateToProps = function (state) {
   return {
     accessToken: state.userState.accessToken,
-    project: state.projectState.project
+    project: state.projectState.project,
+    projectId: state.projectState.selectedProject,
+    shouldUpdate: state.projectState.projectViewShouldUpdate
   }
 }
 

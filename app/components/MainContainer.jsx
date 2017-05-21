@@ -2,6 +2,9 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {hashHistory} from 'react-router'
 
+import ProjectContainer from 'ProjectContainer'
+import ProjectsContainer from 'ProjectsContainer'
+
 class MainContainer extends React.Component {
 
   componentDidMount() {
@@ -10,9 +13,18 @@ class MainContainer extends React.Component {
     }
   }
 
+  createChildren() {
+    return (
+      <div className='row'>
+        <ProjectsContainer/>
+        <ProjectContainer/>
+      </div>
+    )
+  }
+
   render() {
     if (this.props.isLoggedIn) {
-      return this.props.children
+      return this.createChildren()
     } else {
       return null
     }
