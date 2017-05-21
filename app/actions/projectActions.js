@@ -6,3 +6,10 @@ export function getProjectsSuccess(projects) {
     projects,
   }
 }
+
+export function getProjectSuccess(project) {
+  return {
+    type: types.GET_PROJECT_SUCCESS,
+    project,
+  }
+}

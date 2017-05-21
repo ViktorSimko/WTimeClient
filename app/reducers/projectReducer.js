@@ -1,7 +1,8 @@
 import * as types from 'actions'
 
 const initialState = {
-  projects: []
+  projects: [],
+  project: null
 }
 
 const projectReducer = function (state = initialState, action) {
@@ -9,6 +10,8 @@ const projectReducer = function (state = initialState, action) {
   switch (action.type) {
     case types.GET_PROJECTS_SUCCESS:
       return {projects: action.projects}
+    case types.GET_PROJECT_SUCCESS:
+      return {project: action.project}
   }
 
   return state

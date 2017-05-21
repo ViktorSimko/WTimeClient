@@ -16,15 +16,13 @@ class LoginContainer extends React.Component {
   handleLogin(username, password) {
     WTimeAPI.loginUser(username, password).then((userData) => {
       this.props.loginSuccess(userData);
-      hashHistory.replace('/');
+      hashHistory.replace('/projects');
     })
   }
 
   render() {
     return (
-      <div> 
-        <Login onLogin={this.handleLogin}/>
-      </div>
+      <Login onLogin={this.handleLogin}/>
     )
   }
 

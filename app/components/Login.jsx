@@ -17,13 +17,15 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div id='wtime-login'>
-        <h3 className='text-center'>Login</h3>
-        <form onSubmit={this.handleLogin}>
-          <input type='text' ref='userNameField'/>
-          <input type='password' ref='passwordField'/>
-          <button type='submit' className='button expanded'>Login</button>
-        </form>
+      <div className='row'>
+        <div className='small-6 small-centered columns'>
+          <h3 className='text-center'>Login</h3>
+          <form onSubmit={this.handleLogin}>
+            <input type='text' ref='userNameField' />
+            <input type='password' ref='passwordField' />
+            <button type='submit' className='button expanded'>Login</button>
+          </form>
+        </div>
       </div>
     )
   }

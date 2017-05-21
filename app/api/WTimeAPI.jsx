@@ -41,6 +41,19 @@ var WTimeAPI = {
         return res.data
       });
 
+    },
+
+    getProject: function (accessToken, projectId) {
+
+      var projectUrl = `${WTimeAPI.Private.apiUrl}projects/${projectId}?access_token=${accessToken}`;
+
+      return Axios({
+        method: 'GET',
+        url: projectUrl
+      }).then((res) => {
+        return res.data
+      });
+
     }
   }
 
