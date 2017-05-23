@@ -15,12 +15,22 @@ class ProjectsContainer extends React.Component {
     this.handleProjectSelected = this.handleProjectSelected.bind(this)
   }
 
-  componentDidMount() {
-
+  getProjects() {
     WTimeAPI.getProjects(this.props.accessToken).then((projects) => {
       this.props.getProjectsSuccess(projects)
     })
+  }
 
+  componentDidMount() {
+    this.getProjects()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (!this.props.shouldUpdate) {
+      return
+    }
+
+    this.getProjects()
   }
 
   handleProjectSelected(id) {
@@ -48,7 +58,8 @@ class ProjectsContainer extends React.Component {
 const mapStateToProps = function (state) {
   return {
     accessToken: state.userState.accessToken,
-    projects: state.projectState.projects
+    projects: state.projectState.projects,
+    shouldUpdate: state.projectState.projectsContainerShouldUpdate
   }
 }
 

@@ -4,7 +4,8 @@ const initialState = {
   projects: [],
   project: null,
   selectedProject: null,
-  projectViewShouldUpdate: false
+  projectsContainerShouldUpdate: false,
+  projectContainerShouldUpdate: false,
 }
 
 const projectReducer = function (state = initialState, action) {
@@ -17,12 +18,13 @@ const projectReducer = function (state = initialState, action) {
     case types.GET_PROJECT_SUCCESS:
       return Object.assign({}, state, {
         project: action.project,
-        projectViewShouldUpdate: false
+        projectContainerShouldUpdate: false
       })
     case types.SELECTED_PROJECT:
       return Object.assign({}, state, {
         selectedProject: action.id,
-        projectViewShouldUpdate: true
+        projectContainerShouldUpdate: true,
+        tasksContainerShouldUpdate: true
       })
   }
 

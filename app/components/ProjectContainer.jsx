@@ -5,6 +5,7 @@ import {hashHistory} from 'react-router'
 import WTimeAPI from 'WTimeAPI'
 import ProjectDetails from 'ProjectDetails'
 import {getProjectSuccess} from 'actions/projectActions'
+import TasksContainer from 'TasksContainer'
 
 class ProjectContainer extends React.Component {
 
@@ -29,8 +30,9 @@ class ProjectContainer extends React.Component {
     }
 
     return (
-      <div className='columns'>
+      <div className='columns listContainer'>
         {renderProject()}
+        <TasksContainer/>
       </div>
     )
   }
@@ -42,7 +44,7 @@ const mapStateToProps = function (state) {
     accessToken: state.userState.accessToken,
     project: state.projectState.project,
     projectId: state.projectState.selectedProject,
-    shouldUpdate: state.projectState.projectViewShouldUpdate
+    shouldUpdate: state.projectState.projectContainerShouldUpdate
   }
 }
 

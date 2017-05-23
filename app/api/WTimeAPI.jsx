@@ -54,6 +54,32 @@ var WTimeAPI = {
         return res.data
       });
 
+    },
+
+    getTasks: function (accessToken, projectId) {
+
+      var projectsUrl = `${WTimeAPI.Private.apiUrl}projects/${projectId}/tasks?access_token=${accessToken}`;
+
+      return Axios({
+        method: 'GET',
+        url: projectsUrl
+      }).then((res) => {
+        return res.data
+      });
+
+    },
+
+    getTask: function (accessToken, taskId) {
+
+      var projectUrl = `${WTimeAPI.Private.apiUrl}tasks/${taskId}?access_token=${accessToken}`;
+
+      return Axios({
+        method: 'GET',
+        url: projectUrl
+      }).then((res) => {
+        return res.data
+      });
+
     }
   }
 

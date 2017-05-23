@@ -3,8 +3,8 @@ import {connect} from 'react-redux'
 import {hashHistory} from 'react-router'
 
 import WTimeAPI from 'WTimeAPI'
-import ProjectDetails from 'ProjectDetails'
-import {getProjectSuccess} from 'actions/projectActions'
+import TaskDetails from 'TaskDetails'
+import {getTaskSuccess} from 'actions/taskActions'
 
 class TaskContainer extends React.Component {
 
@@ -13,23 +13,24 @@ class TaskContainer extends React.Component {
       return
     }
 
-    WTimeAPI.getProject(this.props.accessToken, this.props.projectId).then((project) => {
-      console.log(project);
-      this.props.getProjectSuccess(project)
+    WTimeAPI.getTask(this.props.accessToken, this.props.taskId).then((task) => {
+      console.log(task);
+      this.props.getTaskSuccess(task)
     })
   }
 
   render() {
-    let renderProject = () => {
-      if (this.props.project) {
-        return <ProjectDetails {...this.props.project}/>
+    let renderTask = () => {
+      if (this.props.task) {
+        return <TaskDetails {...this.props.task}/>
       } else {
         return <p>Loading...</p>
       }
     }
 
     return (
-      <div className='columns'>
+      <div className='columns listContainer'>
+        {renderTask()}
       </div>
     )
   }
@@ -39,15 +40,15 @@ class TaskContainer extends React.Component {
 const mapStateToProps = function (state) {
   return {
     accessToken: state.userState.accessToken,
-    project: state.projectState.project,
-    projectId: state.projectState.selectedProject,
-    shouldUpdate: state.projectState.projectViewShouldUpdate
+    task: state.taskState.task,
+    taskId: state.taskState.selectedTask,
+    shouldUpdate: state.taskState.taskViewShouldUpdate
   }
 }
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    getProjectSuccess: (project) => dispatch(getProjectSuccess(project))
+    getTaskSuccess: (task) => dispatch(getTaskSuccess(task))
   }
 }
 
