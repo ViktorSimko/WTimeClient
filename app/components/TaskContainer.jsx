@@ -6,6 +6,7 @@ import WTimeAPI from 'WTimeAPI'
 import TaskDetails from 'TaskDetails'
 import {getTaskSuccess} from 'actions/taskActions'
 import WorkIntervalsContainer from 'WorkIntervalsContainer'
+import Timer from 'Timer'
 
 class TaskContainer extends React.Component {
 
@@ -20,18 +21,23 @@ class TaskContainer extends React.Component {
   }
 
   render() {
-    let renderTask = () => {
-      if (this.props.task) {
-        return <TaskDetails {...this.props.task}/>
-      } else {
-        return <p>Loading...</p>
+
+    let renderTaskAndWorkIntervals = () => {
+
+      if (this.props.project && this.props.task && this.props.project.id === this.props.task.projectId) {
+        return (
+          <div>
+            <TaskDetails {...this.props.task}/>
+            <Timer/>
+            <WorkIntervalsContainer/>
+          </div>
+        ) 
       }
     }
 
     return (
       <div className='columns listContainer'>
-        {renderTask()}
-        <WorkIntervalsContainer/>
+        {renderTaskAndWorkIntervals()}
       </div>
     )
   }
@@ -43,7 +49,8 @@ const mapStateToProps = function (state) {
     accessToken: state.userState.accessToken,
     task: state.taskState.task,
     taskId: state.taskState.selectedTask,
-    shouldUpdate: state.taskState.taskContainerShouldUpdate
+    shouldUpdate: state.taskState.taskContainerShouldUpdate,
+    project: state.projectState.project
   }
 }
 

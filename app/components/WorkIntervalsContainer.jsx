@@ -13,17 +13,23 @@ class WorkIntervalsContainer extends React.Component {
     super(props)
   }
 
+  getWorkIntervals() {
+    WTimeAPI.getWorkIntervals(this.props.accessToken, this.props.taskId).then((workIntervals) => {
+      this.props.getWorkIntervalsSuccess(workIntervals)
+    })
+  }
+
+  componentDidMount() {
+    this.getWorkIntervals()
+  }
+
   componentDidUpdate(prevProps, prevState) {
 
     if(!this.props.shouldUpdate) {
       return
     }
 
-    WTimeAPI.getWorkIntervals(this.props.accessToken, this.props.taskId).then((workIntervals) => {
-      this.props.getWorkIntervalsSuccess(workIntervals)
-      console.log('updated for ', this.props.taskId)
-    })
-
+    this.getWorkIntervals()
   }
 
   render() {

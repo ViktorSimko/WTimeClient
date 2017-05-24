@@ -15,7 +15,6 @@ class ProjectContainer extends React.Component {
     }
 
     WTimeAPI.getProject(this.props.accessToken, this.props.projectId).then((project) => {
-      console.log(project);
       this.props.getProjectSuccess(project)
     })
   }
@@ -23,16 +22,20 @@ class ProjectContainer extends React.Component {
   render() {
     let renderProject = () => {
       if (this.props.project) {
-        return <ProjectDetails {...this.props.project}/>
+        return (
+          <div>
+            <ProjectDetails {...this.props.project}/>
+            <TasksContainer/>
+          </div>
+        )
       } else {
-        return <p>Loading...</p>
+        return <h2 className='subheader text-center'>Select a project</h2>
       }
     }
 
     return (
       <div className='columns listContainer'>
         {renderProject()}
-        <TasksContainer/>
       </div>
     )
   }

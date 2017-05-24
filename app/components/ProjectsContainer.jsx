@@ -47,7 +47,7 @@ class ProjectsContainer extends React.Component {
     }
 
     return (
-      <div id='project-list-pane' className='small-4 medium-3 large-2 columns'>
+      <div id='project-list-pane' className='small-4 medium-3 large-2 columns listContainer'>
         {renderProjects()}
       </div>
     )

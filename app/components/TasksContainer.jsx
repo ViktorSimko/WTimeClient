@@ -15,16 +15,22 @@ class TasksContainer extends React.Component {
     this.handleTaskSelected = this.handleTaskSelected.bind(this)
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  getTasks() {
+    WTimeAPI.getTasks(this.props.accessToken, this.props.projectId).then((tasks) => {
+      this.props.getTasksSuccess(tasks)
+    })
+  }
 
+  componentDidMount() {
+    this.getTasks()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
     if(!this.props.shouldUpdate) {
       return
     }
 
-    WTimeAPI.getTasks(this.props.accessToken, this.props.projectId).then((tasks) => {
-      this.props.getTasksSuccess(tasks)
-    })
-
+    this.getTasks()
   }
 
   handleTaskSelected(id) {
