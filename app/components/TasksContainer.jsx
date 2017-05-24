@@ -54,7 +54,7 @@ const mapStateToProps = function (state) {
     accessToken: state.userState.accessToken,
     projectId: state.projectState.selectedProject,
     tasks: state.taskState.tasks,
-    shouldUpdate: state.projectState.tasksContainerShouldUpdate
+    shouldUpdate: state.projectState.projectContainerShouldUpdate || state.taskState.tasksContainerShouldUpdate
   }
 }
 

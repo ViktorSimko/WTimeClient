@@ -80,6 +80,19 @@ var WTimeAPI = {
         return res.data
       });
 
+    },
+
+    getWorkIntervals: function (accessToken, taskId) {
+
+      var projectUrl = `${WTimeAPI.Private.apiUrl}tasks/${taskId}/work_intervals?access_token=${accessToken}`;
+
+      return Axios({
+        method: 'GET',
+        url: projectUrl
+      }).then((res) => {
+        return res.data
+      });
+
     }
   }
 

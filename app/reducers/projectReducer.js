@@ -13,7 +13,8 @@ const projectReducer = function (state = initialState, action) {
   switch (action.type) {
     case types.GET_PROJECTS_SUCCESS:
       return Object.assign({}, state, {
-        projects: action.projects
+        projects: action.projects,
+        projectsContainerShouldUpdate: false
       })
     case types.GET_PROJECT_SUCCESS:
       return Object.assign({}, state, {
@@ -24,7 +25,6 @@ const projectReducer = function (state = initialState, action) {
       return Object.assign({}, state, {
         selectedProject: action.id,
         projectContainerShouldUpdate: true,
-        tasksContainerShouldUpdate: true
       })
   }
 

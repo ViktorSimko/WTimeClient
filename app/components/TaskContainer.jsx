@@ -5,6 +5,7 @@ import {hashHistory} from 'react-router'
 import WTimeAPI from 'WTimeAPI'
 import TaskDetails from 'TaskDetails'
 import {getTaskSuccess} from 'actions/taskActions'
+import WorkIntervalsContainer from 'WorkIntervalsContainer'
 
 class TaskContainer extends React.Component {
 
@@ -14,7 +15,6 @@ class TaskContainer extends React.Component {
     }
 
     WTimeAPI.getTask(this.props.accessToken, this.props.taskId).then((task) => {
-      console.log(task);
       this.props.getTaskSuccess(task)
     })
   }
@@ -31,6 +31,7 @@ class TaskContainer extends React.Component {
     return (
       <div className='columns listContainer'>
         {renderTask()}
+        <WorkIntervalsContainer/>
       </div>
     )
   }
@@ -42,7 +43,7 @@ const mapStateToProps = function (state) {
     accessToken: state.userState.accessToken,
     task: state.taskState.task,
     taskId: state.taskState.selectedTask,
-    shouldUpdate: state.taskState.taskViewShouldUpdate
+    shouldUpdate: state.taskState.taskContainerShouldUpdate
   }
 }
 
