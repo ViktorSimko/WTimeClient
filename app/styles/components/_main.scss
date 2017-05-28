@@ -1,6 +1,10 @@
+html,body, #app {
+    height:100%;
+}
+
 #wtime-container {
   overflow-y: auto;
-  height: 100vh;
+  height: 100%;
 }
 
 #wtime-container > div {
@@ -22,4 +26,5 @@
 .list {
   overflow-y: scroll;
   overflow-x: hidden;
+  height: inherit;
 }

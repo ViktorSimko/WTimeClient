@@ -6,7 +6,9 @@ class TaskList extends React.Component {
 
   render() {
     let renderTasks = () => {
-      return this.props.tasks.map((task) => <TaskListItem key={task.id} {...task} onTaskSelected={this.props.onTaskSelected}/>)
+      return this.props.tasks.map((task) => <TaskListItem key={task.id} {...task} 
+                                                          onTaskSelected={this.props.onTaskSelected}
+                                                          onDelete={this.props.onDelete}/>)
     }
 
     return (

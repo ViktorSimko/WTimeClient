@@ -21,6 +21,7 @@ class TasksContainer extends React.Component {
     this.handleAddTask = this.handleAddTask.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.handleClose = this.handleClose.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   getTasks() {
@@ -64,12 +65,19 @@ class TasksContainer extends React.Component {
     this.props.hideEditTaskDialog()
   }
 
+  handleDelete(taskId) {
+    WTimeAPI.deleteTask(this.props.accessToken, taskId).then((task) => {
+      this.props.updateTasksContainer();
+    })
+  }
+
   render() {
     let renderTasks = () => {
       if (this.props.tasks) {
         return <TaskList tasks={this.props.tasks} 
                          onTaskSelected={this.handleTaskSelected} 
-                         onAddTask={this.handleAddTask}/>
+                         onAddTask={this.handleAddTask}
+                         onDelete={this.handleDelete}/>
       } else {
         return <p>Loading...</p>
       }

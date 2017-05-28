@@ -5,7 +5,7 @@ var TaskListItem = (props) => {
   return (
     <div className='row'>
       <button id='task-list-item' className='button columns' onClick={() => props.onTaskSelected(props.id)}>{props.title}</button>
-      <button className="button alert small-1 columns">&times;</button>
+      <button className="button alert small-1 columns" onClick={() => props.onDelete(props.id)}>&times;</button>
     </div>
   )
 }

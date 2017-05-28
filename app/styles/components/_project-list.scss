@@ -1,7 +1,6 @@
 #project-list-pane {
   background-color: #474747;
-  overflow-y: auto;
-  height: 100vh;
+  height: 100%;
   color: white;
 }
 
@@ -11,11 +10,4 @@
   margin-left: 0.2rem;
   margin-right: 0.2rem;
   color: white;
-}
-
-#project-list-item {
-  margin-left: 0.2rem;
-  margin-right: 0.2rem;
-  margin-top: 0.2rem;
-  margin-bottom: 0.5rem;
 }

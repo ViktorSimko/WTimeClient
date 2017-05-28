@@ -85,6 +85,19 @@ var WTimeAPI = {
 
     },
 
+    deleteProject: function (accessToken, projectId) {
+
+      var deleteUrl = `${WTimeAPI.Private.apiUrl}projects/${projectId}?access_token=${accessToken}`;
+
+      return Axios({
+        method: 'DELETE',
+        url: deleteUrl
+      }).then((res) => {
+        return res.data
+      });
+
+    },
+
     getTasks: function (accessToken, projectId) {
 
       var projectsUrl = `${WTimeAPI.Private.apiUrl}projects/${projectId}/tasks?access_token=${accessToken}`;
@@ -119,6 +132,19 @@ var WTimeAPI = {
         method: 'POST',
         url: projectUrl,
         data: task
+      }).then((res) => {
+        return res.data
+      });
+
+    },
+
+    deleteTask: function (accessToken, taskId) {
+
+      var deleteUrl = `${WTimeAPI.Private.apiUrl}tasks/${taskId}?access_token=${accessToken}`;
+
+      return Axios({
+        method: 'DELETE',
+        url: deleteUrl
       }).then((res) => {
         return res.data
       });

@@ -25,6 +25,7 @@ class ProjectsContainer extends React.Component {
     this.handleAddProject = this.handleAddProject.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.handleClose = this.handleClose.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   getProjects() {
@@ -66,12 +67,19 @@ class ProjectsContainer extends React.Component {
     this.props.hideEditProjectDialog()
   }
 
+  handleDelete(projectId) {
+    WTimeAPI.deleteProject(this.props.accessToken, projectId).then((project) => {
+      this.props.updateProjectsContainer()
+    })
+  }
+
   render() {
     let renderProjects = () => {
       if (this.props.projects) {
         return <ProjectList projects={this.props.projects} 
                             onProjectSelected={this.handleProjectSelected} 
-                            onAddProject={this.handleAddProject}/>
+                            onAddProject={this.handleAddProject}
+                            onDelete={this.handleDelete}/>
       } else {
         return <p>Loading...</p>
       }
@@ -81,7 +89,7 @@ class ProjectsContainer extends React.Component {
       <div id='project-list-pane' className='small-4 medium-3 large-2 columns listContainer'>
         {renderProjects()}
         <Reveal show={this.props.edit}>
-          <ProjectEdit project={this.props.editingProject}  onSave={this.handleSave} onClose={this.handleClose}/>
+          <ProjectEdit project={this.props.editingProject} onSave={this.handleSave} onClose={this.handleClose}/>
         </Reveal>
       </div>
     )
