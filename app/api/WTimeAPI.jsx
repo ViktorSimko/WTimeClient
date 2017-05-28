@@ -30,6 +30,21 @@ var WTimeAPI = {
       });
     },
 
+    registerUser: function (username, password) {
+      console.log(username);
+      console.log(password);
+
+      var encodedUsername = encodeURIComponent(username);
+      var encodedPassword = encodeURIComponent(password);
+
+      var registerUrl = `${WTimeAPI.Private.apiUrl}users/register/${encodedUsername}/${encodedPassword}`
+
+      return Axios({
+        method: 'GET',
+        url: registerUrl,
+      });
+    },
+
     getProjects: function (accessToken) {
 
       var projectsUrl = `${WTimeAPI.Private.apiUrl}projects?access_token=${accessToken}`;
@@ -50,6 +65,20 @@ var WTimeAPI = {
       return Axios({
         method: 'GET',
         url: projectUrl
+      }).then((res) => {
+        return res.data
+      });
+
+    },
+
+    postProject: function (accessToken, project) {
+
+      var projectUrl = `${WTimeAPI.Private.apiUrl}projects?access_token=${accessToken}`;
+
+      return Axios({
+        method: 'POST',
+        url: projectUrl,
+        data: project
       }).then((res) => {
         return res.data
       });

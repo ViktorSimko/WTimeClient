@@ -20,11 +20,17 @@ class LoginContainer extends React.Component {
     })
   }
 
+  handleRegister(username, password) {
+    WTimeAPI.registerUser(username, password).then((userData) => {
+      hashHistory.replace('/login');
+    })
+  }
+
   render() {
     return (
       <div className='row align-center align-middle'>
-        <div className='small-6 column'>
-          <Login onLogin={this.handleLogin}/>
+        <div className='small-6 medium-4 large-3 column'>
+          <Login onLogin={this.handleLogin} onRegister={this.handleRegister}/>
         </div>
       </div>
     )

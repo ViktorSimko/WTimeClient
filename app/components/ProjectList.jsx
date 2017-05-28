@@ -13,7 +13,7 @@ class ProjectList extends React.Component {
       <div>
         <div className='row'>
           <h3 className='text subheader columns'>Projects</h3>
-          <button id='project-list-add-button' className='button'>&#x2795;</button>
+          <button id='project-list-add-button' className='button' onClick={this.props.onAddProject}>&#x2795;</button>
         </div>
         <div>
           {renderProjects()}
