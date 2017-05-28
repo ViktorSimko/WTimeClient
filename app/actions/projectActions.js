@@ -34,6 +34,13 @@ export function hideEditProjectDialog() {
   }
 }
 
+export function deleteProjectSuccess(id) {
+  return {
+    type: types.DELETE_PROJECT_SUCCESS,
+    id
+  }
+}
+
 export function updateProjectsContainer() {
   return {
     type: types.UPDATE_PROJECTS_CONTAINER

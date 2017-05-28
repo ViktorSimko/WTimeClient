@@ -38,6 +38,20 @@ const projectReducer = function (state = initialState, action) {
         edit: false,
         editingProject: null,
       })
+    case types.DELETE_PROJECT_SUCCESS:
+      {
+        if (state.selectedProject === action.id) {
+          return Object.assign({}, state, {
+            project: null,
+            selectedProject: null,
+            projectsContainerShouldUpdate: true
+          })
+        }
+
+        return Object.assign({}, state, {
+          projectsContainerShouldUpdate: true
+        })
+      }
     case types.UPDATE_PROJECTS_CONTAINER:
       return Object.assign({}, state, {
         projectsContainerShouldUpdate: true

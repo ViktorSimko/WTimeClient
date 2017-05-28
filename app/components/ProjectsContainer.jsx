@@ -9,6 +9,7 @@ import {selectedProject} from 'actions/projectActions'
 import {showEditProjectDialog} from 'actions/projectActions'
 import {hideEditProjectDialog} from 'actions/projectActions'
 import {updateProjectsContainer} from 'actions/projectActions'
+import {deleteProjectSuccess} from 'actions/projectActions'
 import ProjectEdit from 'ProjectEdit'
 import Reveal from 'react-foundation-components/lib/reveal'
 
@@ -69,7 +70,7 @@ class ProjectsContainer extends React.Component {
 
   handleDelete(projectId) {
     WTimeAPI.deleteProject(this.props.accessToken, projectId).then((project) => {
-      this.props.updateProjectsContainer()
+      this.props.deleteProjectSuccess(projectId)
     })
   }
 
@@ -113,6 +114,7 @@ const mapDispatchToProps = function (dispatch) {
     selectedProject: (id) => dispatch(selectedProject(id)),
     showEditProjectDialog: (project) => dispatch(showEditProjectDialog(project)),
     hideEditProjectDialog: () => dispatch(hideEditProjectDialog()),
+    deleteProjectSuccess: (id) => dispatch(deleteProjectSuccess(id)),
     updateProjectsContainer: () => dispatch(updateProjectsContainer())
   }
 }

@@ -58,6 +58,8 @@ class TaskContainer extends React.Component {
             <WorkIntervalsContainer/>
           </div>
         ) 
+      } else {
+        return <h2 className='subheader text-center'>Select a task</h2>
       }
     }
 
