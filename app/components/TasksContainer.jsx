@@ -10,6 +10,8 @@ import {showEditTaskDialog} from 'actions/taskActions'
 import {hideEditTaskDialog} from 'actions/taskActions'
 import {updateTasksContainer} from 'actions/taskActions'
 import {deleteTaskSuccess} from 'actions/taskActions'
+import {updateTaskStats} from 'actions/statsActions'
+import {updateProjectStats} from 'actions/statsActions'
 import TaskEdit from 'TaskEdit'
 import Reveal from 'react-foundation-components/lib/reveal'
 
@@ -48,7 +50,8 @@ class TasksContainer extends React.Component {
   }
 
   handleTaskSelected(id) {
-    this.props.selectedTask(id);
+    this.props.selectedTask(id)
+    this.props.updateTaskStats()
   }
 
   handleSave(edit, task) {
@@ -69,6 +72,7 @@ class TasksContainer extends React.Component {
   handleDelete(taskId) {
     WTimeAPI.deleteTask(this.props.accessToken, taskId).then((task) => {
       this.props.deleteTaskSuccess(taskId)
+      this.props.updateProjectStats()
     })
   }
 
@@ -114,7 +118,9 @@ const mapDispatchToProps = function (dispatch) {
     showEditTaskDialog: (task) => dispatch(showEditTaskDialog(task)),
     hideEditTaskDialog: () => dispatch(hideEditTaskDialog()),
     deleteTaskSuccess: (id) => dispatch(deleteTaskSuccess(id)), 
-    updateTasksContainer: () => dispatch(updateTasksContainer())
+    updateTasksContainer: () => dispatch(updateTasksContainer()),
+    updateTaskStats: () => dispatch(updateTaskStats()),
+    updateProjectStats: () => dispatch(updateProjectStats())
   }
 }
 

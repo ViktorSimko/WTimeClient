@@ -10,6 +10,7 @@ import {showEditProjectDialog} from 'actions/projectActions'
 import {hideEditProjectDialog} from 'actions/projectActions'
 import {updateProjectsContainer} from 'actions/projectActions'
 import {deleteProjectSuccess} from 'actions/projectActions'
+import {updateProjectStats} from 'actions/statsActions'
 import ProjectEdit from 'ProjectEdit'
 import Reveal from 'react-foundation-components/lib/reveal'
 
@@ -53,6 +54,7 @@ class ProjectsContainer extends React.Component {
 
   handleProjectSelected(id) {
     this.props.selectedProject(id)
+    this.props.updateProjectStats()
   }
 
   handleSave(edit, project) {
@@ -115,7 +117,8 @@ const mapDispatchToProps = function (dispatch) {
     showEditProjectDialog: (project) => dispatch(showEditProjectDialog(project)),
     hideEditProjectDialog: () => dispatch(hideEditProjectDialog()),
     deleteProjectSuccess: (id) => dispatch(deleteProjectSuccess(id)),
-    updateProjectsContainer: () => dispatch(updateProjectsContainer())
+    updateProjectsContainer: () => dispatch(updateProjectsContainer()),
+    updateProjectStats: () => dispatch(updateProjectStats())
   }
 }
 
