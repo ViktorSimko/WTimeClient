@@ -2,9 +2,9 @@ import * as types from 'actions'
 
 const initialState = {
   projectStats: null,
-  projectStatsShouldUpdate: false,
+  projectStatsShouldUpdate: true,
   taskStats: null,
-  taskStatsShouldUpdate: false
+  taskStatsShouldUpdate: true
 }
 
 const statsReducer = function (state = initialState, action) {

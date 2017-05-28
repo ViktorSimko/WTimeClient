@@ -19,9 +19,11 @@ class ProjectContainer extends React.Component {
       this.props.getProjectSuccess(project)
     })
 
-    WTimeAPI.getProjectStats(this.props.accessToken, this.props.projectId).then((stats) => {
-      this.props.getProjectStatsSuccess(stats)
-    })
+    if (this.props.statsShouldUpdate) {
+        WTimeAPI.getProjectStats(this.props.accessToken, this.props.projectId).then((stats) => {
+          this.props.getProjectStatsSuccess(stats)
+        })
+    }
   }
 
   render() {
@@ -53,7 +55,8 @@ const mapStateToProps = function (state) {
     project: state.projectState.project,
     projectId: state.projectState.selectedProject,
     shouldUpdate: state.projectState.projectContainerShouldUpdate,
-    stats: state.statsState.projectStats
+    stats: state.statsState.projectStats,
+    statsShouldUpdate: state.statsState.projectStatsShouldUpdate
   }
 }
 
