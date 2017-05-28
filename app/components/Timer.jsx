@@ -8,6 +8,34 @@ class Timer extends React.Component {
       seconds: 0,
       status: 'stopped'
     }
+
+    this.toggleTimer = this.toggleTimer.bind(this)
+  }
+
+  toggleTimer(e) {
+    e.preventDefault()
+
+    if (this.state.status === 'stopped') {
+      this.timer = setInterval(() => {
+        let {seconds} = this.state
+
+        this.setState({
+          seconds: seconds + 1
+        })
+      }, 1000)
+
+      this.setState({
+        status: 'started'
+      })
+    } else {
+      clearInterval(this.timer)
+      this.timer = null
+
+      this.setState({
+        seconds: 0,
+        status: 'stopped'
+      })
+    }
   }
 
   formatSeconds(seconds) {
@@ -42,7 +70,7 @@ class Timer extends React.Component {
     return (
       <div>
         <h2 className='subheader text-center'>{this.formatSeconds(seconds)}</h2>
-        <button className='button hollow expanded' onClick={this.get}>{buttonText}</button>
+        <button className='button hollow expanded' onClick={this.toggleTimer}>{buttonText}</button>
         
       </div>
     )
