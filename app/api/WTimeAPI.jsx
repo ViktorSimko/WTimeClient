@@ -152,6 +152,19 @@ var WTimeAPI = {
 
     },
 
+    deleteWorkInterval: function (accessToken, workIntervalId) {
+
+      var deleteUrl = `${WTimeAPI.Private.apiUrl}work_intervals/${workIntervalId}?access_token=${accessToken}`;
+
+      return Axios({
+        method: 'DELETE',
+        url: deleteUrl
+      }).then((res) => {
+        return res.data
+      });
+
+    },
+
     getProjectStats: function (accessToken, projectId) {
 
       var incomeUrl = `${WTimeAPI.Private.apiUrl}projects/${projectId}/allIncome?access_token=${accessToken}`;

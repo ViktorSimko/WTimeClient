@@ -14,7 +14,7 @@ var WorkIntervalListItem = (props) => {
       <div id='work-interval-list-item' className='columns'>Start: {startDate}</div>
       <div id='work-interval-list-item' className='columns'>End: {endDate}</div>
       <div id='work-interval-list-item' className='columns text-right'>Duration: {minutes} min {seconds} sec </div>
-      <button className="button alert small-1 columns">&times;</button>
+      <button className="button alert small-1 columns" onClick={() => props.onDelete(props.id)}>&times;</button>
     </div>
   )
 }

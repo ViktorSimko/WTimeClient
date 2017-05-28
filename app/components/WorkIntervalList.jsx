@@ -6,7 +6,7 @@ class WorkIntervalList extends React.Component {
 
   render() {
     let renderWorkIntervals = () => {
-      return this.props.workIntervals.map((workInterval) => <WorkIntervalListItem key={workInterval.id} {...workInterval}/>)
+      return this.props.workIntervals.map((workInterval) => <WorkIntervalListItem key={workInterval.id} onDelete={this.props.onDelete} {...workInterval}/>)
     }
 
     return (

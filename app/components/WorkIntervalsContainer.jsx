@@ -6,11 +6,14 @@ import WTimeAPI from 'WTimeAPI'
 import WorkIntervalList from 'WorkIntervalList'
 import {getWorkIntervalsSuccess} from 'actions/workIntervalActions'
 import {selectedWorkInterval} from 'actions/workIntervalActions'
+import {updateWorkIntervalsContainer} from 'actions/workIntervalActions'
 
 class WorkIntervalsContainer extends React.Component {
 
   constructor(props) {
     super(props)
+
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   getWorkIntervals() {
@@ -32,10 +35,16 @@ class WorkIntervalsContainer extends React.Component {
     this.getWorkIntervals()
   }
 
+  handleDelete(id) {
+    WTimeAPI.deleteWorkInterval(this.props.accessToken, id).then((workInterval) => {
+      this.props.updateWorkIntervalsContainer()
+    })
+  }
+
   render() {
     let renderWorkIntervals = () => {
       if (this.props.workIntervals) {
-        return <WorkIntervalList workIntervals={this.props.workIntervals} />
+        return <WorkIntervalList workIntervals={this.props.workIntervals} onDelete={this.handleDelete}/>
       } else {
         return <p>Loading...</p>
       }
@@ -62,6 +71,7 @@ const mapStateToProps = function (state) {
 const mapDispatchToProps = function (dispatch) {
   return {
     getWorkIntervalsSuccess: (workIntervals) => dispatch(getWorkIntervalsSuccess(workIntervals)),
+    updateWorkIntervalsContainer: () => dispatch(updateWorkIntervalsContainer())
   }
 }
 
