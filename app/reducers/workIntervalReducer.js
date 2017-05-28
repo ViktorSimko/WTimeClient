@@ -13,6 +13,10 @@ const workIntervalReducer = function (state = initialState, action) {
         workIntervals: action.workIntervals,
         workIntervalsContainerShouldUpdate: false
       })
+    case types.UPDATE_WORK_INTERVALS_CONTAINER:
+      return Object.assign({}, state, {
+        workIntervalsContainerShouldUpdate: true
+      })
   }
 
   return state

@@ -6,3 +6,9 @@ export function getWorkIntervalsSuccess(workIntervals) {
     workIntervals
   }
 }
+
+export function updateWorkIntervalsContainer() {
+  return {
+    type: types.UPDATE_WORK_INTERVALS_CONTAINER
+  }
+}

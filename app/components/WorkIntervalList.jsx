@@ -14,7 +14,7 @@ class WorkIntervalList extends React.Component {
         <div className='row'>
           <h3 className='text subheader columns'>WorkIntervals</h3>
         </div>
-        <div>
+        <div className='list'>
           {renderWorkIntervals()}
         </div>
       </div>

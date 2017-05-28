@@ -136,7 +136,21 @@ var WTimeAPI = {
         return res.data
       });
 
-    }
+    },
+
+    postWorkInterval: function (accessToken, work_interval) {
+
+      var projectUrl = `${WTimeAPI.Private.apiUrl}work_intervals?access_token=${accessToken}`;
+
+      return Axios({
+        method: 'POST',
+        url: projectUrl,
+        data: work_interval
+      }).then((res) => {
+        return res.data
+      });
+
+    },
   }
 
 }

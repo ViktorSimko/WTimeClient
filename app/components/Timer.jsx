@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 
 class Timer extends React.Component {
   constructor(props) {
@@ -6,6 +7,7 @@ class Timer extends React.Component {
 
     this.state = {
       seconds: 0,
+      begin: null,
       status: 'stopped'
     }
 
@@ -16,6 +18,10 @@ class Timer extends React.Component {
     e.preventDefault()
 
     if (this.state.status === 'stopped') {
+      this.setState({
+        begin: moment().toArray()
+      })
+
       this.timer = setInterval(() => {
         let {seconds} = this.state
 
@@ -28,10 +34,18 @@ class Timer extends React.Component {
         status: 'started'
       })
     } else {
+      let workInterval = {
+        begin: this.state.begin,
+        end: moment().toArray()
+      }
+
+      this.props.onAddWorkInterval(workInterval)
+
       clearInterval(this.timer)
       this.timer = null
 
       this.setState({
+        begin: null,
         seconds: 0,
         status: 'stopped'
       })

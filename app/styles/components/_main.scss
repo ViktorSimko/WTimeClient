@@ -18,3 +18,8 @@
 .listContainer {
   padding: 1.2rem;
 }
+
+.list {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}

@@ -5,10 +5,17 @@ import {hashHistory} from 'react-router'
 import WTimeAPI from 'WTimeAPI'
 import TaskDetails from 'TaskDetails'
 import {getTaskSuccess} from 'actions/taskActions'
+import {updateWorkIntervalsContainer} from 'actions/workIntervalActions'
 import WorkIntervalsContainer from 'WorkIntervalsContainer'
 import Timer from 'Timer'
 
 class TaskContainer extends React.Component {
+
+  constructor(props) {
+    super(props)
+
+    this.handleAddWorkInterval = this.handleAddWorkInterval.bind(this)
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (!this.props.shouldUpdate) {
@@ -20,6 +27,14 @@ class TaskContainer extends React.Component {
     })
   }
 
+  handleAddWorkInterval(workInterval) {
+    workInterval.taskId = this.props.taskId
+
+    WTimeAPI.postWorkInterval(this.props.accessToken, workInterval).then((workInterval) => {
+      this.props.updateWorkIntervalsContainer()
+    })
+  }
+
   render() {
 
     let renderTaskAndWorkIntervals = () => {
@@ -28,7 +43,7 @@ class TaskContainer extends React.Component {
         return (
           <div>
             <TaskDetails {...this.props.task}/>
-            <Timer/>
+            <Timer onAddWorkInterval={this.handleAddWorkInterval}/>
             <WorkIntervalsContainer/>
           </div>
         ) 
@@ -56,7 +71,8 @@ const mapStateToProps = function (state) {
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    getTaskSuccess: (task) => dispatch(getTaskSuccess(task))
+    getTaskSuccess: (task) => dispatch(getTaskSuccess(task)),
+    updateWorkIntervalsContainer: () => dispatch(updateWorkIntervalsContainer())
   }
 }
 
