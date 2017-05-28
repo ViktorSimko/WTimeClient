@@ -111,6 +111,20 @@ var WTimeAPI = {
 
     },
 
+    postTask: function (accessToken, task) {
+
+      var projectUrl = `${WTimeAPI.Private.apiUrl}tasks?access_token=${accessToken}`;
+
+      return Axios({
+        method: 'POST',
+        url: projectUrl,
+        data: task
+      }).then((res) => {
+        return res.data
+      });
+
+    },
+
     getWorkIntervals: function (accessToken, taskId) {
 
       var projectUrl = `${WTimeAPI.Private.apiUrl}tasks/${taskId}/work_intervals?access_token=${accessToken}`;

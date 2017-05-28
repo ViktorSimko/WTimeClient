@@ -20,3 +20,28 @@ export function selectedTask(id) {
     id,
   }
 }
+
+export function showEditTaskDialog(task) {
+  return {
+    type: types.SHOW_EDIT_TASK,
+    editingTask: task,
+  }
+}
+
+export function hideEditTaskDialog() {
+  return {
+    type: types.HIDE_EDIT_TASK
+  }
+}
+
+export function updateTasksContainer() {
+  return {
+    type: types.UPDATE_TASKS_CONTAINER
+  }
+}
+
+export function updateTaskContainer() {
+  return {
+    type: types.UPDATE_TASK_CONTAINER
+  }
+}

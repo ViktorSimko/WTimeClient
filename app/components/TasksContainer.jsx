@@ -6,6 +6,11 @@ import WTimeAPI from 'WTimeAPI'
 import TaskList from 'TaskList'
 import {getTasksSuccess} from 'actions/taskActions'
 import {selectedTask} from 'actions/taskActions'
+import {showEditTaskDialog} from 'actions/taskActions'
+import {hideEditTaskDialog} from 'actions/taskActions'
+import {updateTasksContainer} from 'actions/taskActions'
+import TaskEdit from 'TaskEdit'
+import Reveal from 'react-foundation-components/lib/reveal'
 
 class TasksContainer extends React.Component {
 
@@ -13,6 +18,9 @@ class TasksContainer extends React.Component {
     super(props)
 
     this.handleTaskSelected = this.handleTaskSelected.bind(this)
+    this.handleAddTask = this.handleAddTask.bind(this)
+    this.handleSave = this.handleSave.bind(this)
+    this.handleClose = this.handleClose.bind(this)
   }
 
   getTasks() {
@@ -33,14 +41,35 @@ class TasksContainer extends React.Component {
     this.getTasks()
   }
 
+  handleAddTask() {
+    this.props.showEditTaskDialog()
+  }
+
   handleTaskSelected(id) {
     this.props.selectedTask(id);
+  }
+
+  handleSave(edit, task) {
+
+    task.projectId = this.props.projectId
+
+    WTimeAPI.postTask(this.props.accessToken, task).then((task) => {
+      this.props.hideEditTaskDialog()
+      this.props.updateTasksContainer()
+    })
+
+  }
+
+  handleClose() {
+    this.props.hideEditTaskDialog()
   }
 
   render() {
     let renderTasks = () => {
       if (this.props.tasks) {
-        return <TaskList tasks={this.props.tasks} onTaskSelected={this.handleTaskSelected}/>
+        return <TaskList tasks={this.props.tasks} 
+                         onTaskSelected={this.handleTaskSelected} 
+                         onAddTask={this.handleAddTask}/>
       } else {
         return <p>Loading...</p>
       }
@@ -49,6 +78,9 @@ class TasksContainer extends React.Component {
     return (
       <div id='task-list-pane'>
         {renderTasks()}
+        <Reveal show={this.props.edit}>
+          <TaskEdit task={this.props.editingTask} onSave={this.handleSave} onClose={this.handleClose}/>
+        </Reveal>
       </div>
     )
   }
@@ -60,6 +92,8 @@ const mapStateToProps = function (state) {
     accessToken: state.userState.accessToken,
     projectId: state.projectState.selectedProject,
     tasks: state.taskState.tasks,
+    edit: state.taskState.edit,
+    editingTask: state.taskState.editingTask,
     shouldUpdate: state.projectState.projectContainerShouldUpdate || state.taskState.tasksContainerShouldUpdate
   }
 }
@@ -67,7 +101,10 @@ const mapStateToProps = function (state) {
 const mapDispatchToProps = function (dispatch) {
   return {
     getTasksSuccess: (tasks) => dispatch(getTasksSuccess(tasks)),
-    selectedTask: (id) => dispatch(selectedTask(id))
+    selectedTask: (id) => dispatch(selectedTask(id)),
+    showEditTaskDialog: (task) => dispatch(showEditTaskDialog(task)),
+    hideEditTaskDialog: () => dispatch(hideEditTaskDialog()),
+    updateTasksContainer: () => dispatch(updateTasksContainer())
   }
 }
 

@@ -13,7 +13,7 @@ class TaskList extends React.Component {
       <div>
         <div className='row'>
           <h3 className='text subheader columns'>Tasks</h3>
-          <button id='task-list-add-button' className='button'>&#x2795;</button>
+          <button id='task-list-add-button' className='button' onClick={this.props.onAddTask}>&#x2795;</button>
         </div>
         <div>
           {renderTasks()}
