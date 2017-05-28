@@ -5,6 +5,7 @@ import {hashHistory} from 'react-router'
 import WTimeAPI from 'WTimeAPI'
 import ProjectDetails from 'ProjectDetails'
 import {getProjectSuccess} from 'actions/projectActions'
+import {getProjectStatsSuccess} from 'actions/statsActions'
 import TasksContainer from 'TasksContainer'
 
 class ProjectContainer extends React.Component {
@@ -17,6 +18,10 @@ class ProjectContainer extends React.Component {
     WTimeAPI.getProject(this.props.accessToken, this.props.projectId).then((project) => {
       this.props.getProjectSuccess(project)
     })
+
+    WTimeAPI.getProjectStats(this.props.accessToken, this.props.projectId).then((stats) => {
+      this.props.getProjectStatsSuccess(stats)
+    })
   }
 
   render() {
@@ -24,7 +29,7 @@ class ProjectContainer extends React.Component {
       if (this.props.project) {
         return (
           <div>
-            <ProjectDetails {...this.props.project}/>
+            <ProjectDetails {...this.props.project} stats={this.props.stats}/>
             <TasksContainer/>
           </div>
         )
@@ -47,13 +52,15 @@ const mapStateToProps = function (state) {
     accessToken: state.userState.accessToken,
     project: state.projectState.project,
     projectId: state.projectState.selectedProject,
-    shouldUpdate: state.projectState.projectContainerShouldUpdate
+    shouldUpdate: state.projectState.projectContainerShouldUpdate,
+    stats: state.statsState.projectStats
   }
 }
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    getProjectSuccess: (project) => dispatch(getProjectSuccess(project))
+    getProjectSuccess: (project) => dispatch(getProjectSuccess(project)),
+    getProjectStatsSuccess: (stats) => dispatch(getProjectStatsSuccess(stats))
   }
 }
 

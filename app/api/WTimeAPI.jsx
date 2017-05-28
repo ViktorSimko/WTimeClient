@@ -151,6 +151,52 @@ var WTimeAPI = {
       });
 
     },
+
+    getProjectStats: function (accessToken, projectId) {
+
+      var incomeUrl = `${WTimeAPI.Private.apiUrl}projects/${projectId}/allIncome?access_token=${accessToken}`;
+      var timeUrl = `${WTimeAPI.Private.apiUrl}projects/${projectId}/allWorkedTime?access_token=${accessToken}`;
+
+      var stat = {};
+
+      return Axios({
+        method: 'GET',
+        url: incomeUrl
+      }).then((res) => {
+        stat.income = res.data
+        return Axios({
+          method: 'GET',
+          url: timeUrl
+        })
+      }).then((res) => {
+        stat.time = res.data
+        return stat
+      })
+
+    },
+
+    getTaskStats: function (accessToken, taskId) {
+
+      var incomeUrl = `${WTimeAPI.Private.apiUrl}tasks/${taskId}/allIncome?access_token=${accessToken}`;
+      var timeUrl = `${WTimeAPI.Private.apiUrl}tasks/${taskId}/allWorkedTime?access_token=${accessToken}`;
+
+      var stat = {};
+
+      return Axios({
+        method: 'GET',
+        url: incomeUrl
+      }).then((res) => {
+        stat.income = res.data
+        return Axios({
+          method: 'GET',
+          url: timeUrl
+        })
+      }).then((res) => {
+        stat.time = res.data
+        return stat
+      })
+
+    }
   }
 
 }
