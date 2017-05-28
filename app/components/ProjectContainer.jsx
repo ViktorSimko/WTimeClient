@@ -11,6 +11,12 @@ import TasksContainer from 'TasksContainer'
 class ProjectContainer extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
+    if (this.props.statsShouldUpdate && this.props.projectId) {
+        WTimeAPI.getProjectStats(this.props.accessToken, this.props.projectId).then((stats) => {
+          this.props.getProjectStatsSuccess(stats)
+        })
+    }
+
     if (!this.props.shouldUpdate) {
       return
     }
@@ -18,12 +24,6 @@ class ProjectContainer extends React.Component {
     WTimeAPI.getProject(this.props.accessToken, this.props.projectId).then((project) => {
       this.props.getProjectSuccess(project)
     })
-
-    if (this.props.statsShouldUpdate) {
-        WTimeAPI.getProjectStats(this.props.accessToken, this.props.projectId).then((stats) => {
-          this.props.getProjectStatsSuccess(stats)
-        })
-    }
   }
 
   render() {

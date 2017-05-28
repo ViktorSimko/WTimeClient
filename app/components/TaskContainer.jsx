@@ -21,6 +21,12 @@ class TaskContainer extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if (this.props.statsShouldUpdate && this.props.taskId) {
+      WTimeAPI.getTaskStats(this.props.accessToken, this.props.taskId).then((stats) => {
+        this.props.getTaskStatsSuccess(stats)
+      })
+    }
+
     if (!this.props.shouldUpdate) {
       return
     }
@@ -28,12 +34,6 @@ class TaskContainer extends React.Component {
     WTimeAPI.getTask(this.props.accessToken, this.props.taskId).then((task) => {
       this.props.getTaskSuccess(task)
     })
-
-    if (this.props.statsShouldUpdate) {
-      WTimeAPI.getTaskStats(this.props.accessToken, this.props.taskId).then((stats) => {
-        this.props.getTaskStatsSuccess(stats)
-      })
-    }
   }
 
   handleAddWorkInterval(workInterval) {
