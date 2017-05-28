@@ -38,6 +38,20 @@ const taskReducer = function (state = initialState, action) {
         edit: false,
         editingTask: null,
       })
+    case types.DELETE_TASK_SUCCESS:
+      {
+        if (state.selectedTask === action.id) {
+          return Object.assign({}, state, {
+            task: null,
+            selectedTask: null,
+            tasksContainerShouldUpdate: true
+          })
+        }
+
+        return Object.assign({}, state, {
+          tasksContainerShouldUpdate: true
+        })
+      }
     case types.UPDATE_TASKS_CONTAINER:
       return Object.assign({}, state, {
         tasksContainerShouldUpdate: true

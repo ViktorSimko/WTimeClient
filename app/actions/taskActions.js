@@ -34,6 +34,13 @@ export function hideEditTaskDialog() {
   }
 }
 
+export function deleteTaskSuccess(id) {
+  return {
+    type: types.DELETE_TASK_SUCCESS,
+    id
+  }
+}
+
 export function updateTasksContainer() {
   return {
     type: types.UPDATE_TASKS_CONTAINER
