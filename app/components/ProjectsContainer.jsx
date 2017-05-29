@@ -11,6 +11,7 @@ import {hideEditProjectDialog} from 'actions/projectActions'
 import {updateProjectsContainer} from 'actions/projectActions'
 import {deleteProjectSuccess} from 'actions/projectActions'
 import {updateProjectStats} from 'actions/statsActions'
+import {logoutSuccess} from 'actions/userActions'
 import ProjectEdit from 'ProjectEdit'
 import Reveal from 'react-foundation-components/lib/reveal'
 
@@ -28,6 +29,7 @@ class ProjectsContainer extends React.Component {
     this.handleSave = this.handleSave.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
   }
 
   getProjects() {
@@ -76,6 +78,11 @@ class ProjectsContainer extends React.Component {
     })
   }
 
+  handleLogout() {
+    this.props.logout()
+    hashHistory.replace('/login')
+  }
+
   render() {
     let renderProjects = () => {
       if (this.props.projects) {
@@ -90,6 +97,10 @@ class ProjectsContainer extends React.Component {
 
     return (
       <div id='project-list-pane' className='small-4 medium-3 large-2 columns listContainer'>
+        <div className='row'>
+          <h5 className='subheader columns'>{this.props.username}</h5>
+          <button className='button alert small-4 columns' onClick={this.handleLogout}>Logout</button>
+        </div>
         {renderProjects()}
         <Reveal show={this.props.edit}>
           <ProjectEdit project={this.props.editingProject} onSave={this.handleSave} onClose={this.handleClose}/>
@@ -103,6 +114,7 @@ class ProjectsContainer extends React.Component {
 const mapStateToProps = function (state) {
   return {
     accessToken: state.userState.accessToken,
+    username: state.userState.username,
     projects: state.projectState.projects,
     shouldUpdate: state.projectState.projectsContainerShouldUpdate,
     edit: state.projectState.edit,
@@ -118,7 +130,8 @@ const mapDispatchToProps = function (dispatch) {
     hideEditProjectDialog: () => dispatch(hideEditProjectDialog()),
     deleteProjectSuccess: (id) => dispatch(deleteProjectSuccess(id)),
     updateProjectsContainer: () => dispatch(updateProjectsContainer()),
-    updateProjectStats: () => dispatch(updateProjectStats())
+    updateProjectStats: () => dispatch(updateProjectStats()),
+    logout: () => dispatch(logoutSuccess())
   }
 }
 
